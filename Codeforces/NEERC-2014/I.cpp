@@ -21,22 +21,25 @@ typedef long long int lld;
 typedef long double llf;
 typedef pair<int, int> pii;
 
-const int MAXN = 100002;
-
-struct segment_tree {
-    #define IZQ (nodo*2)
-    #define DER (nodo*2+1)
-
-    
-
-} ST;
-
-
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
 
-    
+    int n;
+    cin >> n;
+    int arr[n];
+    for (int i = 0; i < n; ++i)
+        cin >> arr[i];
+    sort(arr, arr + n);
+
+    int buyed = 1;
+    int c = 0;
+    for (int i = 0; c + arr[i] <= arr[n-1] && i < n-1; ++i) {
+        buyed ++;
+        c += arr[i];
+    }
+
+    cout << buyed << "\n";
     
     return 0;
 }
