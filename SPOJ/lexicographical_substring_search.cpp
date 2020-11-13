@@ -1,7 +1,3 @@
-/*
-    Suffix array
-    https://www.urionlinejudge.com.br/judge/es/problems/view/1530
-*/
 #include <limits.h>
 #include <math.h>
 #include <stdio.h>
@@ -85,91 +81,51 @@ vector<int> lcp_array(string& s, vector<int>& p) {
     return lcp;
 }
 
-const int LOG_N = 20;
-vector<vector<int>> do_sparse(vector<int>& lcp) {
-    int n = lcp.size();
-    vector<vector<int>> sparse(LOG_N, vector<int>(n, 0));
-    sparse[0] = lcp;
-    for (int l = 1; l < LOG_N; ++l) {
-        for (int i = 0; i < n; ++i) {
-            if (i + (1 << (l - 1)) >= n) break;
-            sparse[l][i] = min(sparse[l - 1][i], sparse[l - 1][i + (1 << (l - 1))]);
-        }
-    }
-    return sparse;
-}
-
-int query(int i, int j, vector<vector<int>>& sparse) {
-    int n = sparse[0].size();
-    if (i > j) return -1;  // Imposible
-    int ans = min(sparse[0][i], sparse[0][j]);
-    for (int l = sparse.size() - 1; l >= 0; --l) {
-        if (i + (1 << l) <= j) {
-            ans = min(ans, sparse[l][i]);
-            i += (1 << l);
-        }
-    }
-    return ans;
-}
-
 int main() {
     ios_base::sync_with_stdio(0);
     cin.tie(0);
 
-    const int LOG_N = 22;
-
     string s;
-    while (cin >> s) {
-        string t;
-        for (char c : s)
-            if (c != '?') t.push_back(c);
-        reverse(t.begin(), t.end());
+    cin >> s;
+    vector<int> p = suffix_array(s);
+    vector<int> lcp = lcp_array(s, p);
+    int n = s.size();
+    vector<int> arr(n);
 
-        int n = t.size();
-        vector<int> p = suffix_array(t);
-        vector<int> lcp = lcp_array(t, p);
-        vector<int> pp(n);
-        for (int i = 0; i < n; ++i) {
-            pp[p[i]] = i;
+    for (int i = 0; i < n; ++i) {
+        int idx = p[i];
+        arr[i] = n - idx;
+        if (i > 0) {
+            arr[i] -= lcp[i-1];
         }
+    }
 
-        // Sparse table
-        vector<vector<int>> sparse = do_sparse(lcp);
-        
-        vector<lld> dp(n);
-        lld curr = 0;
-        int j = 0;
-        set<int> yaMeti;
-        for (int i = 0; i < n; ++i) {
-            while (s[j] == '?') {
-                cout << curr << "\n";
-                j++;
-            }
-            // Calcula dp
-            if (i > 0) dp[i] = dp[i - 1];
-            int idx = n - i - 1;
+    vector<int> sum = arr;
+    for (int i = 1; i < n; ++i) {
+        sum[i] += sum[i-1];
+    }
 
-            auto it = yaMeti.lower_bound(pp[idx]);
-            // Vemos el sig
-            int menor = i + 1;
-            if (it != yaMeti.end()) {
-                int l = query(pp[idx], *it - 1, sparse);
-                menor = min(menor, i + 1 - l);
+    int q;
+    for (cin >> q; q; --q) {
+        int k;
+        cin >> k;
+
+        int l = 0, r = n-1;
+        while (l < r) {
+            int med = (l + r) / 2;
+            if (sum[med] < k) {
+                l = med + 1;
+            } else {
+                r = med;
             }
-            if (it != yaMeti.begin()) {
-                --it;
-                int l = query(*it, pp[idx] - 1, sparse);
-                menor = min(menor, i + 1 - l);
-            }
-            yaMeti.insert(pp[idx]);
-            dp[i] += menor;
-            curr = dp[i];
-            j++;
         }
-        while (j < s.size() && s[j] == '?') {
-            cout << curr << "\n";
-            j++;
+        int idx = p[l];
+        int kk = k;
+        if (l > 0) { 
+            kk -= sum[l-1];
+            kk += lcp[l-1];
         }
+        cout << s.substr(idx, kk) << "\n";
     }
 
     return 0;
