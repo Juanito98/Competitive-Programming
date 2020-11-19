@@ -1,3 +1,7 @@
+/*
+    2 SAT Problem
+    https://codeforces.com/contest/776/problem/D
+*/
 #include <limits.h>
 #include <math.h>
 #include <stdio.h>
