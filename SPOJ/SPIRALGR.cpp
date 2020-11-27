@@ -61,13 +61,9 @@ void init() {
     int dir = 0;
     int missing = 2;
     x++;
-
-    int minX = MAXN, maxX = 0;
     for (int i = 2; i < MAX; ++i) {
         pos[i] = {x, y};
         if (isPrime[i]) invalid[x][y] = true;
-        minX = min(minX, x);
-        maxX = max(maxX, x),
         missing--;
         if (missing == 0) {
             dir++;
@@ -83,7 +79,6 @@ void init() {
         x += mov[dir][0];
         y += mov[dir][1];
     }
-    //cout << minX << " " << maxX << endl;
 }
 
 int caso;
