@@ -39,7 +39,6 @@ lld maxSum(lld ops, int i = 0, int j = 0) {
         vis[ops][i][j] = true;
         lld notTake = maxSum(ops, i + 1, j);
         // Take it. i - j is the number of ops we need to place the candy i in the jth position
-        lld opsNeeded = i - j;
         lld take = maxSum(ops - (i - j), i + 1, j + 1);
         if (take != -1) {
             take += arr[i];

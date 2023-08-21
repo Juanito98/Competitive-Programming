@@ -8,7 +8,7 @@ typedef long long int lld;
 
 int main() {
     // Variables de entrada
-    int n, m;
+    int n;
     std::unordered_map<lld, int> arr; // notar que no nos importa el orden
     
     // Variable donde guardamos la inflación acumulada en los Q días

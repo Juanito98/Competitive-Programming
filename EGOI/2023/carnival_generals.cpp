@@ -1,5 +1,6 @@
 #include <iostream>
 #include <unordered_set>
+#include <vector>
 
 bool invalid_general(std::vector<int>& arr, int pos, std::unordered_set<int>& cantSitWith) {
     // Si el general en la posición pos tiene vecinos 

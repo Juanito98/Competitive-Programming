@@ -1,6 +1,7 @@
 #include <iostream>
 #include <utility>
 #include <unordered_set>
+#include <vector>
 
 typedef std::pair<int, int> pii;
 
