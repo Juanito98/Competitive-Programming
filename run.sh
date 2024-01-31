@@ -1,3 +1,7 @@
+#!/bin/bash
+
+set -e
+
 PROBLEM=plantilla.cpp
 
 if [ $# == 1 ] 
