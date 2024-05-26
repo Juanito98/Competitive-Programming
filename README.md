@@ -1,3 +1,3 @@
 # Competitive-Programming
 
-Solution to some competitive programming problems 
+Solution to some competitive programming problems
