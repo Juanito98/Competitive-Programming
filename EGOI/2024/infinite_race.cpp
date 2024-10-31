@@ -1,3 +1,4 @@
+// Source: https://oj.uz/problem/view/EGOI24_infiniterace2
 #include <limits.h>
 #include <math.h>
 #include <stdio.h>
