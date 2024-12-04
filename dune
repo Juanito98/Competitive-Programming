@@ -2,3 +2,16 @@
  (name main)
  (promote (until-clean))
  (libraries codeforces))
+
+(rule
+ (alias default)
+ (deps main.exe case.in)
+ (targets case.out)
+ (mode
+  (promote (until-clean)))
+ (action
+  (with-stdin-from
+   case.in
+   (with-stdout-to
+    case.out
+    (run ./main.exe)))))

@@ -1,11 +1,13 @@
+open Core
+
 let main () =
-  let input = Stdio. "%s" (fun i -> i) in
-  let lines = '\n' input in
+  let input = In_channel.input_all Stdio.stdin in
+  let lines = String.split ~on:'\n' input in
   match lines with
   | _ :: data ->
       let rec solve = function
         | _ :: arr :: rest ->
-            let arr = String.split_on_char ' ' arr |> List.map int_of_string in
+            let arr = String.split ~on:' ' arr |> List.map ~f:int_of_string in
             let possible =
               match arr with
               | [ _ ] -> true
