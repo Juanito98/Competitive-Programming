@@ -1,7 +1,7 @@
 (executable
  (name main)
  (promote (until-clean))
- (libraries codeforces))
+ (libraries codeforces other))
 
 (rule
  (alias default)
