@@ -1,7 +1,9 @@
 (executable
  (name main)
  (promote (until-clean))
- (libraries codeforces other))
+ (libraries codeforces other)
+ (preprocess
+  (pps ppx_jane)))
 
 (rule
  (alias default)
