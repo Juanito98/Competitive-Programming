@@ -1,7 +1,5 @@
 open Core
 
-let solving = `Part2
-
 let correct_order rules query =
   let nodes = Set.of_list (module Int) query in
   let indegree = Hashtbl.create (module Int) in
@@ -20,9 +18,9 @@ let part1 rules query = if valid rules query then middle query else 0
 let part2 rules query =
   if valid rules query then 0 else middle (correct_order rules query)
 
-let solve = function `Part1 -> part1 | `Part2 -> part2
+let solve = function `Part_1 -> part1 | `Part_2 -> part2
 
-let main () =
+let main () ~part =
   let input = In_channel.input_all Stdio.stdin in
   let lines = String.split ~on:'\n' input in
   let m, _ = List.findi_exn lines ~f:(fun _idx s -> String.equal s "") in
@@ -38,7 +36,46 @@ let main () =
            String.split line ~on:',' |> List.map ~f:Int.of_string)
   in
   let ans =
-    List.fold queries ~init:0 ~f:(fun acc query ->
-        acc + solve solving rules query)
+    List.fold queries ~init:0 ~f:(fun acc query -> acc + solve part rules query)
   in
   print_s [%sexp (ans : int)]
+
+let%expect_test _ =
+  let input =
+    {|
+47|53
+97|13
+97|61
+97|47
+75|29
+61|13
+75|53
+29|13
+97|29
+53|29
+61|53
+97|53
+61|29
+47|13
+75|47
+97|75
+47|61
+75|61
+47|29
+75|13
+53|13
+
+75,47,61,53,29
+97,61,53,29,13
+75,29,13
+75,97,47,61,53
+61,13,29
+97,13,75,29,47
+|}
+  in
+  (* Part 1*)
+  Utils.For_tests.with_stdin input ~f:(main ~part:`Part_1);
+  [%expect {| 143 |}];
+  (* Part 2*)
+  Utils.For_tests.with_stdin input ~f:(main ~part:`Part_2);
+  [%expect {| 123 |}]
