@@ -67,9 +67,31 @@ let part2 mat =
   done;
   !ans
 
-let solve = function `Part1 -> part1 | `Part2 -> part2
+let solve = function `Part_1 -> part1 | `Part_2 -> part2
 
-let main () =
+let main () ~part =
   let input = In_channel.input_all Stdio.stdin in
   let mat = String.split ~on:'\n' input |> Array.of_list in
-  print_endline (Int.to_string (solve `Part1 mat))
+  print_endline (Int.to_string (solve part mat))
+
+let%expect_test _ =
+  let input =
+    {|
+MMMSXXMASM
+MSAMXMSMSA
+AMXSXMAAMM
+MSAMASMSMX
+XMASAMXAMM
+XXAMMXXAMA
+SMSMSASXSS
+SAXAMASAAA
+MAMMMXMMMM
+MXMXAXMASX
+|}
+  in
+  (* Part 1*)
+  Utils.For_tests.with_stdin input ~f:(main ~part:`Part_1);
+  [%expect {| 18 |}];
+  (* Part 2*)
+  Utils.For_tests.with_stdin input ~f:(main ~part:`Part_2);
+  [%expect {| 9 |}]
