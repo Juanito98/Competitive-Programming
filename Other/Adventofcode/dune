@@ -1,0 +1,8 @@
+(library
+ (name adventofcode)
+ (libraries core utils core_kernel.pairing_heap)
+ (inline_tests)
+ (preprocess
+  (pps ppx_jane ppx_expect)))
+
+(include_subdirs qualified)
