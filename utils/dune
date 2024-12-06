@@ -1,6 +1,6 @@
 (library
- (name other)
- (libraries core)
+ (name utils)
+ (libraries core core_unix)
  (preprocess
   (pps ppx_jane)))
 

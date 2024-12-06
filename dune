@@ -1,14 +1,11 @@
 (executable
  (name main)
  (promote (until-clean))
- (libraries codeforces other)
+ (libraries codeforces adventofcode)
  (preprocess
   (pps ppx_jane)))
 
 (rule
- (alias default)
- (deps main.exe case.in)
- (targets case.out)
  (mode
   (promote (until-clean)))
  (action
