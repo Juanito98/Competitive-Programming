@@ -93,7 +93,10 @@ let process_cheats mat ~max_cheat =
     Map.of_alist_fold (module Int) cheats ~init:0 ~f:(fun acc _ -> acc + 1)
   in
   print_s [%sexp (count : int Map.M(Int).t)];
-  count |> Map.filter_keys ~f:(Int.( < ) 100) |> Map.sum (module Int) ~f:Fn.id
+  count
+  |> Map.filter_keys ~f:(Int.( < ) 100)
+  |> Map.data
+  |> List.sum (module Int) ~f:Fn.id
 
 let part1 mat = process_cheats mat ~max_cheat:2
 let part2 mat = process_cheats mat ~max_cheat:20

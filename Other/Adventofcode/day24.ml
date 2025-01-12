@@ -1,8 +1,13 @@
 open Core
 
-type op = XOR | AND | OR [@@deriving string]
+type op = XOR | AND | OR
 
-let op_to_string = function XOR -> "XOR" | AND -> "AND" | OR -> "OR"
+let op_of_string = function
+  | "XOR" -> XOR
+  | "AND" -> AND
+  | "OR" -> OR
+  | _ -> failwith "could not parse op"
+
 let apply a b = function XOR -> a lxor b | AND -> a land b | OR -> a lor b
 
 let part1 ~gates ~init_values =

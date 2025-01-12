@@ -1,5 +1,6 @@
 (executable
  (name main)
+ (public_name main)
  (promote (until-clean))
  (libraries codeforces adventofcode)
  (preprocess
