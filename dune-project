@@ -11,6 +11,7 @@
   core_kernel
   core_unix
   ppx_expect
-  ppx_jane))
+  ppx_jane
+  utop))
 
 ; See the complete stanza docs at https://dune.readthedocs.io/en/stable/dune-files.html#dune-project
