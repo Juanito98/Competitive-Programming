@@ -1,3 +1,4 @@
+// https://open.kattis.com/problem-sources/European%20Girls%27%20Olympiad%20in%20Informatics%202024
 #include <limits.h>
 #include <math.h>
 #include <stdio.h>
