@@ -2,7 +2,7 @@
  (name main)
  (public_name main)
  (promote (until-clean))
- (libraries codeforces adventofcode)
+ (libraries codeforces adventofcode egoi_2025)
  (preprocess
   (pps ppx_jane)))
 
@@ -15,3 +15,8 @@
    (with-stdout-to
     case.out
     (run ./main.exe)))))
+
+(env
+ (dev
+  (flags
+   (:standard -warn-error -A))))

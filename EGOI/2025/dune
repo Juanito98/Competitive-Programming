@@ -1,0 +1,8 @@
+(library
+ (name egoi_2025)
+ (libraries core utils)
+ (inline_tests)
+ (preprocess
+  (pps ppx_jane ppx_expect)))
+
+(include_subdirs qualified)
