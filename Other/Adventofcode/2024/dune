@@ -1,5 +1,5 @@
 (library
- (name adventofcode)
+ (name adventofcode_2024)
  (libraries core utils core_kernel.pairing_heap)
  (inline_tests)
  (preprocess

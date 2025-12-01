@@ -2,7 +2,7 @@
  (name main)
  (public_name main)
  (promote (until-clean))
- (libraries codeforces adventofcode egoi_2025)
+ (libraries codeforces egoi_2025)
  (preprocess
   (pps ppx_jane)))
 
