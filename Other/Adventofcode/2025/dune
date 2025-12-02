@@ -1,0 +1,9 @@
+(library
+ (name adventofcode_2025)
+ (libraries core core_kernel.composition_infix utils
+  core_kernel.pairing_heap)
+ (inline_tests)
+ (preprocess
+  (pps ppx_jane ppx_expect)))
+
+(include_subdirs qualified)
